@@ -20,17 +20,17 @@ Tip="${Green_font_prefix}[注意]${Font_color_suffix}"
 installbbr() {
     kernel_version="4.11.8"
     if [[ "${release}" == "centos" ]]; then
-        rpm --import http://${github}/bbr/${release}/RPM-GPG-KEY-elrepo.org
-        yum install -y http://${github}/bbr/${release}/${version}/${bit}/kernel-ml-${kernel_version}.rpm
+        rpm --import ${github}/bbr/${release}/RPM-GPG-KEY-elrepo.org
+        yum install -y ${github}/bbr/${release}/${version}/${bit}/kernel-ml-${kernel_version}.rpm
         yum remove -y kernel-headers
-        yum install -y http://${github}/bbr/${release}/${version}/${bit}/kernel-ml-headers-${kernel_version}.rpm
-        yum install -y http://${github}/bbr/${release}/${version}/${bit}/kernel-ml-devel-${kernel_version}.rpm
+        yum install -y ${github}/bbr/${release}/${version}/${bit}/kernel-ml-headers-${kernel_version}.rpm
+        yum install -y ${github}/bbr/${release}/${version}/${bit}/kernel-ml-devel-${kernel_version}.rpm
         elif [[ "${release}" == "debian" || "${release}" == "ubuntu" ]]; then
         mkdir bbr && cd bbr
         wget http://security.debian.org/debian-security/pool/updates/main/o/openssl/libssl1.0.0_1.0.1t-1+deb8u10_amd64.deb
-        wget -N --no-check-certificate http://${github}/bbr/debian-ubuntu/linux-headers-${kernel_version}-all.deb
-        wget -N --no-check-certificate http://${github}/bbr/debian-ubuntu/${bit}/linux-headers-${kernel_version}.deb
-        wget -N --no-check-certificate http://${github}/bbr/debian-ubuntu/${bit}/linux-image-${kernel_version}.deb
+        wget -N --no-check-certificate ${github}/bbr/debian-ubuntu/linux-headers-${kernel_version}-all.deb
+        wget -N --no-check-certificate ${github}/bbr/debian-ubuntu/${bit}/linux-headers-${kernel_version}.deb
+        wget -N --no-check-certificate ${github}/bbr/debian-ubuntu/${bit}/linux-image-${kernel_version}.deb
         
         dpkg -i libssl1.0.0_1.0.1t-1+deb8u10_amd64.deb
         dpkg -i linux-headers-${kernel_version}-all.deb
@@ -107,7 +107,7 @@ startbbrmod() {
     if [[ "${release}" == "centos" ]]; then
         yum install -y make gcc
         mkdir bbrmod && cd bbrmod
-        wget -N --no-check-certificate http://${github}/bbr/tcp_tsunami.c
+        wget -N --no-check-certificate ${github}/bbr/tcp_tsunami.c
         echo "obj-m:=tcp_tsunami.o" >Makefile
         make -C /lib/modules/$(uname -r)/build M=$(pwd) modules CC=/usr/bin/gcc
         chmod +x ./tcp_tsunami.ko
