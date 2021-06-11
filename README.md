@@ -1,3 +1,4 @@
+## 暂不支持ARM64实例，周末更新
 ## 首次使用
  - ~~Star本项目~~
  - 下载(Github直链) `wget -N --no-check-certificate "https://raw.githubusercontent.com/CoiaPrant/BBR/master/bbr.sh"`
